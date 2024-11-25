@@ -7,8 +7,14 @@ export const register = async (userData) => {
   return response.data;
 };
 
-export const login = async (userData) => {
+export const login = async (userData, nav) => {
   const response = await axios.post(`${API_URL}/login`, userData);
+  if (!response) {
+    alert("로그인 중 오류가 생겼습니다.");
+  }
+  if (response) {
+    nav("/");
+  }
   return response.data;
 };
 

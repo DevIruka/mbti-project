@@ -3,7 +3,7 @@ import FormWrapper from "../styles/formStyle/FormWrapper";
 import StForm from "../styles/formStyle/StForm";
 import { StInput } from "../styles/formStyle/StInput";
 
-const Form = () => {
+const Signupform = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -28,4 +28,4 @@ const Form = () => {
     </>
   );
 };
-export default Form;
+export default Signupform;
