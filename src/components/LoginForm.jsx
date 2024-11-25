@@ -3,22 +3,33 @@ import { login } from "../api/auth";
 import FormWrapper from "../styles/formStyle/FormWrapper";
 import StForm from "../styles/formStyle/StForm";
 import { StInput } from "../styles/formStyle/StInput";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLogin } from "../redux/slices/isLoginSlice";
 
 const LoginForm = () => {
-  const loginData = useSelector((state) => state.isLogin);
   const dispatch = useDispatch();
   const nav = useNavigate();
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const id = formData.get("id").trim();
     const password = formData.get("password").trim();
     const userData = { id, password };
-    const result = await login(userData, nav);
-    dispatch(setLogin());
+    try {
+      const data = await login(userData);
+      const { accessToken } = data;
+      if (data.success) {
+        alert("로그인 성공!");
+        localStorage.setItem("accessToken", accessToken);
+        dispatch(setLogin());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    nav("/");
   };
+
   return (
     <>
       <FormWrapper>
