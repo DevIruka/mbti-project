@@ -35,4 +35,13 @@ export const getUserProfile = async (token) => {
   return response.data;
 };
 
-export const updateProfile = async (formData) => {};
+export const updateProfile = async (formData, token) => {
+  const response = await authApi.patch("/profile", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log(response);
+  return response.data;
+};
