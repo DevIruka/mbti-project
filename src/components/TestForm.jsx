@@ -3,7 +3,7 @@ import { questions } from "../data/questions";
 
 const TestForm = ({ onSubmit }) => {
   const [answers, setAnswers] = useState(
-    Array(questions.length).fill({ type: "", answer: "" }),
+    Array(questions.length).fill({ type: "", answer: "" })
   );
 
   const handleChange = (index, value) => {
@@ -49,7 +49,7 @@ const TestForm = ({ onSubmit }) => {
       ))}
       <button
         type="submit"
-        className="w-full bg-red-500 text-white py-3 rounded-lg font-semibold hover:bg-primary-dark transition duration-300 hover:text-[#FF5A5F]"
+        className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-300"
       >
         제출하기
       </button>
