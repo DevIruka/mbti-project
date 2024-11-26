@@ -9,17 +9,17 @@ import Layout from "../styles/layout/layout";
 import { useSelector } from "react-redux";
 
 const PublicRoute = ({ element }) => {
-  const isLogin = useSelector((state) => state.isLogin.isLogin);
+  const isLogin = useSelector((state) => state.auth.isLogin);
   return isLogin ? <Navigate to="/" /> : element;
 };
 
 const PrivateRoute = ({ element }) => {
-  const isLogin = useSelector((state) => state.isLogin.isLogin);
+  const isLogin = useSelector((state) => state.auth.isLogin);
   return isLogin ? element : <Navigate to="/login" />;
 };
 
 const Router = () => {
-  const isLogin = useSelector((state) => state.isLogin.isLogin);
+  const isLogin = useSelector((state) => state.auth.isLogin);
   return (
     <BrowserRouter>
       <Routes>

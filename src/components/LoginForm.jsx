@@ -4,7 +4,7 @@ import FormWrapper from "../styles/formStyle/FormWrapper";
 import StForm from "../styles/formStyle/StForm";
 import { StInput } from "../styles/formStyle/StInput";
 import { useDispatch } from "react-redux";
-import { setLogin } from "../redux/slices/isLoginSlice";
+import { setLogin } from "../redux/slices/authSlice";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const LoginForm = () => {
       if (data.success) {
         alert("로그인 성공!");
         localStorage.setItem("accessToken", accessToken);
-        dispatch(setLogin());
+        dispatch(setLogin(id));
       }
     } catch (error) {
       console.log(error);
