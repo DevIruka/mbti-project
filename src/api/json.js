@@ -26,6 +26,15 @@ export const createTestResult = async (resultData) => {
   return response.data;
 };
 
-export const deleteTestResult = async (id) => {};
+export const deleteTestResult = async (id) => {
+  const response = await jsonApi.delete(`/testResults/${id}`);
+  return response.data;
+};
 
-export const updateTestResultVisibility = async (id, visibility) => {};
+export const updateTestResultVisibility = async (data) => {
+  const toggle = !data.visibility;
+  const response = await jsonApi.patch(`/testResults/${data.jsonId}`, {
+    visibility: toggle,
+  });
+  return response.data;
+};

@@ -1,13 +1,15 @@
-import { getTestResults } from "../api/json";
-import { useQuery } from "@tanstack/react-query";
+import {
+  deleteTestResult,
+  getTestResults,
+  updateTestResultVisibility,
+} from "../api/json";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import StMain from "../styles/globalStyle/StMain";
 import TestResultItem from "./TestResultItem";
 import StUl from "../styles/globalStyle/StUl";
-import { useSelector } from "react-redux";
 
 const TestResultList = () => {
-  const data = useSelector((state) => state.auth.userId);
-  console.log(data)
+  const queryClient = useQueryClient();
   const { data: testResults, isPending } = useQuery({
     queryKey: ["testResult"],
     queryFn: async () => {
@@ -15,6 +17,23 @@ const TestResultList = () => {
       return data;
     },
   });
+
+  const { mutate: visibilityMutation } = useMutation({
+    mutationFn: updateTestResultVisibility,
+    onSuccess: () => {
+      alert("공개 설정이 변경되었습니다.");
+      queryClient.invalidateQueries(["testResult"]);
+    },
+  });
+
+  const { mutate: deleteMutation } = useMutation({
+    mutationFn: deleteTestResult,
+    onSuccess: () => {
+      alert("데이터가 삭제되었습니다.");
+      queryClient.invalidateQueries(["testResult"]);
+    },
+  });
+
   if (isPending) {
     return (
       <StMain>
@@ -25,13 +44,18 @@ const TestResultList = () => {
   return (
     <StUl>
       {testResults.map((result) => {
-        const { id, nickname, avatar, mbtiResult } = result;
+        const { id, userId, nickname, avatar, mbtiResult, visibility } = result;
         return (
           <TestResultItem
             key={id}
+            jsonId={id}
+            cardId={userId}
             nickname={nickname}
             avatar={avatar}
             mbtiResult={mbtiResult}
+            visibility={visibility}
+            visibilityMutation={visibilityMutation}
+            deleteMutation={deleteMutation}
           />
         );
       })}

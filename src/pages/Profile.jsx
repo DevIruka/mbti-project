@@ -19,8 +19,6 @@ const Profile = () => {
 
   if (isPending) return <h2>로딩중...</h2>;
 
-  console.log(userProfile);
-
   const textHandler = (e) => {
     setNickname(e.target.value);
   };

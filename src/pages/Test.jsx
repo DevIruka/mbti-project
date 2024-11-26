@@ -9,23 +9,28 @@ import { useQuery } from "@tanstack/react-query";
 const TestPage = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("accessToken");
+
   const { data: userProfile } = useQuery({
     queryKey: ["userProfile"],
     queryFn: async () => {
-      const data = getUserProfile(token);
+      const data = await getUserProfile(token);
       return data;
     },
   });
-
   const [result, setResult] = useState(null);
 
   const handleTestSubmit = async (answers) => {
-    const { nickname, avatar } = userProfile;
+    const { id, nickname, avatar } = userProfile;
     const mbtiResult = calculateMBTI(answers);
     setResult(mbtiResult);
-    const mbtiUserData = { nickname, avatar, mbtiResult };
+    const mbtiUserData = {
+      userId: id,
+      nickname,
+      avatar,
+      mbtiResult,
+      visibility: true,
+    };
     const response = await createTestResult(mbtiUserData);
-    console.log(response);
   };
 
   const handleNavigateToResults = () => {
