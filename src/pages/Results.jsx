@@ -1,4 +1,7 @@
+import TestResultList from "../components/TestResultList";
+
 const Results = () => {
-  return <div>테스트 결과 페이지</div>;
+  
+  return <TestResultList />;
 };
 export default Results;
