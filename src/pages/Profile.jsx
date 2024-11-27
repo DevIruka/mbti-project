@@ -1,16 +1,26 @@
 import { useState } from "react";
 import { getUserProfile, updateProfile } from "../api/auth";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import StMain from "../styles/globalStyle/StMain";
 import Container from "../styles/globalStyle/Container";
 
 const Profile = () => {
   const token = localStorage.getItem("accessToken");
+  const queryClient = useQueryClient();
+
   const { data: userProfile, isPending } = useQuery({
     queryKey: ["userProfile"],
     queryFn: async () => {
       const data = getUserProfile(token);
       return data;
+    },
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: updateProfile,
+    onSuccess: () => {
+      alert("프로필이 변경되었습니다.");
+      queryClient.invalidateQueries(["userProfile"]);
     },
   });
 
@@ -32,7 +42,7 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("avatar", imgFile);
     formData.append("nickname", nickname);
-    updateProfile(formData, token);
+    mutate({ formData, token });
   };
 
   return (
@@ -58,10 +68,12 @@ const Profile = () => {
             <input
               name="nickname"
               className="border border-gray-300 rounded px-2 py-1 w-[300px] m-2"
+              placeholder="수정하고 싶은 이름을 적어주세요."
               onChange={textHandler}
             />
           </div>
           <div className="flex flex-col">
+            <label>프로필 사진을 변경하려면 파일을 첨부해주세요</label>
             <input
               type="file"
               accept="image/*"
