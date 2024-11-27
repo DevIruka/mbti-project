@@ -1,8 +1,10 @@
 import axios from "axios";
 import { authApi } from "./auth";
 
+const BASE_URL = import.meta.env.VITE_JSON_URL;
+
 const jsonApi = axios.create({
-  baseURL: "https://darkened-fluttering-raven.glitch.me",
+  baseURL: BASE_URL,
 });
 
 jsonApi.interceptors.request.use(
