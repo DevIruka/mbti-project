@@ -5,6 +5,7 @@ import StForm from "../styles/formStyle/StForm";
 import { StInput } from "../styles/formStyle/StInput";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../redux/slices/authSlice";
+import { StBlueButton } from "../styles/globalStyle/Stbutton";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const LoginForm = () => {
         <StForm onSubmit={onSubmitHandler}>
           <StInput tag={"아이디"} />
           <StInput tag={"비밀번호"} />
-          <button>로그인 기능</button>
+          <StBlueButton>로그인</StBlueButton>
         </StForm>
       </FormWrapper>
     </>

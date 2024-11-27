@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { questions } from "../data/questions";
+import { StBlueButton } from "../styles/globalStyle/Stbutton";
 
 const TestForm = ({ onSubmit }) => {
   const [answers, setAnswers] = useState(
@@ -46,12 +47,11 @@ const TestForm = ({ onSubmit }) => {
           </div>
         </div>
       ))}
-      <button
+      <StBlueButton
         type="submit"
-        className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-300"
       >
         제출하기
-      </button>
+      </StBlueButton>
     </form>
   );
 };
