@@ -2,7 +2,7 @@ import axios from "axios";
 import { authApi } from "./auth";
 
 const jsonApi = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://darkened-fluttering-raven.glitch.me",
 });
 
 jsonApi.interceptors.request.use(

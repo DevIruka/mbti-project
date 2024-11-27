@@ -2,8 +2,10 @@ import axios from "axios";
 import reduxStore from "../redux/store/store";
 import { setLogout } from "../redux/slices/authSlice";
 
+const BASE_URL = import.meta.env.VITE_MONEYFUL_URL;
+
 export const authApi = axios.create({
-  baseURL: "https://moneyfulpublicpolicy.co.kr",
+  baseURL: BASE_URL,
 });
 
 authApi.interceptors.request.use(
