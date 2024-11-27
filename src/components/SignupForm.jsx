@@ -2,6 +2,7 @@ import { register } from "../api/auth";
 import FormWrapper from "../styles/formStyle/FormWrapper";
 import StForm from "../styles/formStyle/StForm";
 import { StInput } from "../styles/formStyle/StInput";
+import { StBlueButton } from "../styles/globalStyle/Stbutton";
 
 const Signupform = () => {
   const onSubmitHandler = async (e) => {
@@ -11,8 +12,7 @@ const Signupform = () => {
     const password = formData.get("password").trim();
     const nickname = formData.get("nickname").trim();
     const userData = { id, password, nickname };
-    const result = await register(userData);
-    console.log(result);
+    await register(userData);
   };
   return (
     <>
@@ -21,8 +21,7 @@ const Signupform = () => {
           <StInput tag={"아이디"} />
           <StInput tag={"비밀번호"} />
           <StInput tag={"닉네임"} />
-          <button>회원가입 기능</button>
-          <button>로그인 기능</button>
+          <StBlueButton>회원가입 기능</StBlueButton>
         </StForm>
       </FormWrapper>
     </>
