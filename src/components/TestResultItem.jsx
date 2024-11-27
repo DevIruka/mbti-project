@@ -27,11 +27,11 @@ const TestResultItem = ({
   const description = mbtiDescriptions[mbtiResult];
 
   const visibilityBtnHandler = async () => {
-    const response = await visibilityMutation({ jsonId, visibility });
+    await visibilityMutation({ jsonId, visibility });
   };
 
   const deleteBtnHandler = async () => {
-    const response = await deleteMutation(jsonId);
+    await deleteMutation(jsonId);
   };
 
   if (isPending) {
@@ -40,7 +40,7 @@ const TestResultItem = ({
 
   if (visibility === true || userProfile?.id === cardId) {
     return (
-      <li className="flex flex-col items-center shadow-lg m-10 bg-white rounded min-h-[300px] w-[500px]">
+      <li className="flex flex-col items-center shadow-lg m-10 bg-white rounded min-h-[200px] w-[500px]">
         <span>{nickname}</span>
         <img
           src={avatar || defaultImg}
@@ -62,7 +62,7 @@ const TestResultItem = ({
           </div>
         )}
         <span>{mbtiResult}</span>
-        <p className="text-sm">{description}</p>
+        <p className="m-5 text-sm">{description}</p>
       </li>
     );
   }
