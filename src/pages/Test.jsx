@@ -5,6 +5,9 @@ import { createTestResult } from "../api/json";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile } from "../api/auth";
 import { useQuery } from "@tanstack/react-query";
+import StMain from "../styles/globalStyle/StMain";
+import Container from "../styles/globalStyle/Container";
+import { StBlueButton } from "../styles/globalStyle/Stbutton";
 
 const TestPage = () => {
   const navigate = useNavigate();
@@ -49,19 +52,20 @@ const TestPage = () => {
           </>
         ) : (
           <>
-            <h1 className="text-3xl font-bold text-primary-color mb-6">
-              테스트 결과: {result}
-            </h1>
-            <p className="text-lg text-gray-700 mb-6">
-              {mbtiDescriptions[result] ||
-                "해당 성격 유형에 대한 설명이 없습니다."}
-            </p>
-            <button
-              onClick={handleNavigateToResults}
-              className="px-4 py-2 bg-blue-500 text-white font-semibold rounded hover:bg-blue-600 transition duration-300"
-            >
-              결과 페이지로 이동하기
-            </button>
+            <StMain>
+              <Container>
+                <h1 className="text-3xl font-bold text-primary-color mb-6">
+                  테스트 결과: {result}
+                </h1>
+                <p className="text-lg text-gray-700 mb-6">
+                  {mbtiDescriptions[result] ||
+                    "해당 성격 유형에 대한 설명이 없습니다."}
+                </p>
+                <StBlueButton onClick={handleNavigateToResults}>
+                  결과 페이지로 이동하기
+                </StBlueButton>
+              </Container>
+            </StMain>
           </>
         )}
       </div>
