@@ -1,10 +1,17 @@
-import Form from "../components/Form";
+import Form from "../components/SignupForm";
+import Container from "../styles/globalStyle/Container";
+import StMain from "../styles/globalStyle/StMain";
 
 const Signup = () => {
   return (
-    <main className="flex items-center justify-center h-screen">
-      <Form />
-    </main>
+    <StMain>
+      <Container>
+        <h2 className="text-[30px]">회원가입</h2>
+        <div className="mt-10">
+          <Form />
+        </div>
+      </Container>
+    </StMain>
   );
 };
 export default Signup;
