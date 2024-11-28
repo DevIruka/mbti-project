@@ -1,4 +1,5 @@
 import { register } from "../api/auth";
+import validateField from "../utils/validateField";
 
 const useSignupForm = (nav) => {
   const onSubmitHandler = async (e) => {
@@ -8,6 +9,28 @@ const useSignupForm = (nav) => {
     const password = formData.get("password").trim();
     const nickname = formData.get("nickname").trim();
     const userData = { id, password, nickname };
+    const dataArray = [id, password, nickname];
+    let error = false;
+    for (let i = 0; i < dataArray.length; i++) {
+      let name = "";
+      if (i === 0) {
+        name = "id";
+      }
+      if (i === 1) {
+        name = "password";
+      }
+      if (i === 2) {
+        name = "nickname";
+      }
+      error = validateField(name, dataArray[i]);
+    }
+
+    if (error.id || error.password || error.nickname !== "") {
+      alert("모든 필드가 제대로 작성되지 않았습니다.");
+      console.log(error);
+      return;
+    }
+
     try {
       const data = await register(userData);
       if (data.success) {
@@ -15,6 +38,7 @@ const useSignupForm = (nav) => {
       }
     } catch (error) {
       console.log(error);
+      return;
     }
     nav("/login");
   };

@@ -1,4 +1,4 @@
-export const StInput = ({ tag }) => {
+export const StInput = ({ tag, onChange, ref }) => {
   let name = "";
   let type = "";
   switch (tag) {
@@ -21,6 +21,8 @@ export const StInput = ({ tag }) => {
       className="border border-gray-300 rounded px-2 py-1 w-[300px] m-2"
       placeholder={tag}
       name={name}
+      onChange={onChange}
+      ref={ref}
     />
   );
 };
