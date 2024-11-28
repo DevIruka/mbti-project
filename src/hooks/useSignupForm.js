@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { register } from "../api/auth";
 import validateField from "../utils/validateField";
 
@@ -42,6 +43,18 @@ const useSignupForm = (nav) => {
     }
     nav("/login");
   };
-  return { onSubmitHandler };
+
+  const [formErrors, setFormErrors] = useState({});
+  const idRef = useRef();
+  const passwordRef = useRef();
+  const nicknameRef = useRef();
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+    const errors = validateField(name, value);
+    setFormErrors((prev) => ({ ...prev, ...errors }));
+  };
+
+  return { onSubmitHandler, onChangeHandler, formErrors, idRef, passwordRef, nicknameRef };
 };
 export default useSignupForm;

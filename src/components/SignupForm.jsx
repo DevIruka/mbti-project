@@ -4,23 +4,17 @@ import StForm from "../styles/formStyle/StForm";
 import { StInput } from "../styles/formStyle/StInput";
 import { StBlueButton } from "../styles/globalStyle/Stbutton";
 import useSignupForm from "../hooks/useSignupForm";
-import { useRef, useState } from "react";
-import validateField from "../utils/validateField";
 
 const Signupform = () => {
   const nav = useNavigate();
-  const { onSubmitHandler } = useSignupForm(nav);
-
-  const [formErrors, setFormErrors] = useState({});
-  const idRef = useRef();
-  const passwordRef = useRef();
-  const nicknameRef = useRef();
-
-  const onChangeHandler = (e) => {
-    const { name, value } = e.target;
-    const errors = validateField(name, value);
-    setFormErrors((prev) => ({ ...prev, ...errors }));
-  };
+  const {
+    onSubmitHandler,
+    onChangeHandler,
+    formErrors,
+    idRef,
+    passwordRef,
+    nicknameRef,
+  } = useSignupForm(nav);
 
   return (
     <>
