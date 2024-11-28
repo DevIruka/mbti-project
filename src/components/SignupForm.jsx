@@ -21,7 +21,7 @@ const Signupform = () => {
           <StInput tag={"아이디"} />
           <StInput tag={"비밀번호"} />
           <StInput tag={"닉네임"} />
-          <StBlueButton>회원가입 기능</StBlueButton>
+          <StBlueButton>회원가입</StBlueButton>
         </StForm>
       </FormWrapper>
     </>
