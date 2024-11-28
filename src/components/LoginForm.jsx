@@ -1,35 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { login } from "../api/auth";
 import FormWrapper from "../styles/formStyle/FormWrapper";
 import StForm from "../styles/formStyle/StForm";
 import { StInput } from "../styles/formStyle/StInput";
 import { useDispatch } from "react-redux";
-import { setLogin } from "../redux/slices/authSlice";
 import { StBlueButton } from "../styles/globalStyle/Stbutton";
+import useLoginForm from "../hooks/useLoginForm";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
-
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const id = formData.get("id").trim();
-    const password = formData.get("password").trim();
-    const userData = { id, password };
-    try {
-      const data = await login(userData);
-      const { accessToken } = data;
-      if (data.success) {
-        alert("로그인 성공!");
-        localStorage.setItem("accessToken", accessToken);
-        dispatch(setLogin(id));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    nav("/");
-  };
+  const { onSubmitHandler } = useLoginForm(dispatch, nav);
 
   return (
     <>

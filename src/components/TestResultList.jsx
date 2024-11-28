@@ -10,6 +10,7 @@ import StUl from "../styles/globalStyle/StUl";
 
 const TestResultList = () => {
   const queryClient = useQueryClient();
+  
   const { data: testResults, isPending } = useQuery({
     queryKey: ["testResult"],
     queryFn: async () => {

@@ -1,23 +1,9 @@
-import { useState } from "react";
 import { questions } from "../data/questions";
 import { StBlueButton } from "../styles/globalStyle/Stbutton";
+import useTestForm from "../hooks/useTestForm";
 
 const TestForm = ({ onSubmit }) => {
-  const [answers, setAnswers] = useState(
-    Array(questions.length).fill({ type: "", answer: "" })
-  );
-
-  const handleChange = (index, value) => {
-    const newAnswers = [...answers];
-    newAnswers[index] = { type: questions[index].type, answer: value };
-    setAnswers(newAnswers);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(answers);
-  };
-
+  const { answers, handleChange, handleSubmit } = useTestForm(onSubmit);
   return (
     <form onSubmit={handleSubmit} className="space-y-6 p-6 bg-white rounded-lg">
       {questions.map((q, index) => (
@@ -47,11 +33,7 @@ const TestForm = ({ onSubmit }) => {
           </div>
         </div>
       ))}
-      <StBlueButton
-        type="submit"
-      >
-        제출하기
-      </StBlueButton>
+      <StBlueButton type="submit">제출하기</StBlueButton>
     </form>
   );
 };

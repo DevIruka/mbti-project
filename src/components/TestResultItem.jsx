@@ -3,6 +3,7 @@ import { getUserProfile } from "../api/auth";
 import { useQuery } from "@tanstack/react-query";
 import { StBlueButton, StRedButton } from "../styles/globalStyle/Stbutton";
 import defaultImg from "/guest.png";
+import useTestResultBtn from "../hooks/useTestResultBtn";
 
 const TestResultItem = ({
   jsonId,
@@ -15,7 +16,6 @@ const TestResultItem = ({
   visibilityMutation,
 }) => {
   const token = localStorage.getItem("accessToken");
-
   const { data: userProfile, isPending } = useQuery({
     queryKey: ["userProfile"],
     queryFn: async () => {
@@ -25,14 +25,12 @@ const TestResultItem = ({
   });
 
   const description = mbtiDescriptions[mbtiResult];
-
-  const visibilityBtnHandler = async () => {
-    await visibilityMutation({ jsonId, visibility });
-  };
-
-  const deleteBtnHandler = async () => {
-    await deleteMutation(jsonId);
-  };
+  const { deleteBtnHandler, visibilityBtnHandler } = useTestResultBtn(
+    jsonId,
+    visibility,
+    deleteMutation,
+    visibilityMutation
+  );
 
   if (isPending) {
     <h2>로딩 중입니다. 조금만 기다려주세요.</h2>;
